@@ -28,9 +28,9 @@ int main()
 float greater(float x, float y)
 {
 if(x>y)
-	cout<<number_1<<" is greater than "<<number_2;
+	cout<<number_1<<" is greater than :"<<number_2;
 else
-	cout<<number_2<<" is greater than "<<number_1;
+	cout<<number_2<<" is greater than :"<<number_1;
 }
 float add(float x, float y)
 {
@@ -49,4 +49,4 @@ if(y=0)
 	cout<<"invalid";
 else
 	return (x/y);
-}
+} 
