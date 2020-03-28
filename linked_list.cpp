@@ -136,3 +136,23 @@ node *single_llist::create_node(int value)
         return temp;
     }
 }
+
+/*
+ * Inserting Node at last
+ */
+void single_llist::insert_last()
+{
+    int value;
+    cout<<"Enter the value to be inserted: ";
+    cin>>value;
+    struct node *temp, *s;
+    temp = create_node(value);
+    s = start;
+    while (s->next != NULL)
+    {
+        s = s->next;
+    }
+    temp->next = NULL;
+    s->next = temp;
+    cout<<"Element Inserted at last"<<endl;
+}
