@@ -182,6 +182,51 @@ void single_llist::insert_last()
 }
 
 /*
+ * Delete element at a given position
+ */
+void single_llist::delete_pos()
+{
+    int pos, i, counter = 0;
+    if (start == NULL)
+    {
+        cout<<"List is empty"<<endl;
+        return;
+    }
+    cout<<"Enter the position of value to be deleted: ";
+    cin>>pos;
+    struct node *s, *ptr;
+    s = start;
+    if (pos == 1)
+    {
+        start = s->next;
+    }
+    else
+    {
+        while (s != NULL)
+        {
+            s = s->next;
+            counter++;  
+        }
+        if (pos > 0 && pos <= counter)
+        {
+            s = start;
+            for (i = 1;i < pos;i++)
+            {
+                ptr = s;
+                s = s->next;
+            }
+            ptr->next = s->next;
+        }
+        else
+        {
+            cout<<"Position out of range"<<endl;
+        }
+        free(s);
+        cout<<"Element Deleted"<<endl;
+    }
+}
+ 
+/*
  * Insertion of node at a given position
  */
 void single_llist::insert_pos()
@@ -258,3 +303,4 @@ void single_llist::sort()
         ptr = ptr->next;
     }
 }
+
