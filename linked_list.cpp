@@ -138,6 +138,30 @@ node *single_llist::create_node(int value)
 }
 
 /*
+ * Inserting element in beginning
+ */
+void single_llist::insert_begin()
+{
+    int value;
+    cout<<"Enter the value to be inserted: ";
+    cin>>value;
+    struct node *temp, *p;
+    temp = create_node(value);
+    if (start == NULL)
+    {
+        start = temp;
+        start->next = NULL;
+    }
+    else
+    {
+        p = start;
+        start = temp;
+        start->next = p;
+    }
+    cout<<"Element Inserted at beginning"<<endl;
+}
+
+/*
  * Inserting Node at last
  */
 void single_llist::insert_last()
@@ -156,7 +180,6 @@ void single_llist::insert_last()
     s->next = temp;
     cout<<"Element Inserted at last"<<endl;
 }
-
 
 /*
  * Delete element at a given position
@@ -203,3 +226,81 @@ void single_llist::delete_pos()
     }
 }
  
+/*
+ * Insertion of node at a given position
+ */
+void single_llist::insert_pos()
+{
+    int value, pos, counter = 0;
+    cout<<"Enter the value to be inserted: ";
+    cin>>value;
+    struct node *temp, *s, *ptr;
+    temp = create_node(value);
+    cout<<"Enter the postion at which node to be inserted: ";
+    cin>>pos;
+    int i;
+    s = start;
+    while (s != NULL)
+    {
+        s = s->next;
+        counter++;
+    }
+    if (pos == 1)
+    {
+        if (start == NULL)
+        {
+            start = temp;
+            start->next = NULL;
+        }
+        else
+        {
+            ptr = start;
+            start = temp;
+            start->next = ptr;
+        }
+    }
+    else if (pos > 1  && pos <= counter)
+    {
+        s = start;
+        for (i = 1; i < pos; i++)
+        {
+            ptr = s;
+            s = s->next;
+        }
+        ptr->next = temp;
+        temp->next = s;
+    }
+    else
+    {
+        cout<<"Positon out of range"<<endl;
+    }
+}
+
+/*
+ * Sorting Link List
+ */
+void single_llist::sort()
+{
+    struct node *ptr, *s;
+    int value;
+    if (start == NULL)
+    {
+        cout<<"The List is empty"<<endl;
+        return;
+    }
+    ptr = start;
+    while (ptr != NULL)
+    {
+        for (s = ptr->next;s !=NULL;s = s->next)
+        {
+            if (ptr->info > s->info)
+            {
+                value = ptr->info;
+                ptr->info = s->info;
+                s->info = value;
+            }
+        }
+        ptr = ptr->next;
+    }
+}
+
