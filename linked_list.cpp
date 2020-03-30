@@ -138,6 +138,30 @@ node *single_llist::create_node(int value)
 }
 
 /*
+ * Inserting element in beginning
+ */
+void single_llist::insert_begin()
+{
+    int value;
+    cout<<"Enter the value to be inserted: ";
+    cin>>value;
+    struct node *temp, *p;
+    temp = create_node(value);
+    if (start == NULL)
+    {
+        start = temp;
+        start->next = NULL;
+    }
+    else
+    {
+        p = start;
+        start = temp;
+        start->next = p;
+    }
+    cout<<"Element Inserted at beginning"<<endl;
+}
+
+/*
  * Inserting Node at last
  */
 void single_llist::insert_last()
@@ -157,6 +181,51 @@ void single_llist::insert_last()
     cout<<"Element Inserted at last"<<endl;
 }
 
+/*
+ * Delete element at a given position
+ */
+void single_llist::delete_pos()
+{
+    int pos, i, counter = 0;
+    if (start == NULL)
+    {
+        cout<<"List is empty"<<endl;
+        return;
+    }
+    cout<<"Enter the position of value to be deleted: ";
+    cin>>pos;
+    struct node *s, *ptr;
+    s = start;
+    if (pos == 1)
+    {
+        start = s->next;
+    }
+    else
+    {
+        while (s != NULL)
+        {
+            s = s->next;
+            counter++;  
+        }
+        if (pos > 0 && pos <= counter)
+        {
+            s = start;
+            for (i = 1;i < pos;i++)
+            {
+                ptr = s;
+                s = s->next;
+            }
+            ptr->next = s->next;
+        }
+        else
+        {
+            cout<<"Position out of range"<<endl;
+        }
+        free(s);
+        cout<<"Element Deleted"<<endl;
+    }
+}
+ 
 /*
  * Insertion of node at a given position
  */
@@ -206,6 +275,7 @@ void single_llist::insert_pos()
         cout<<"Positon out of range"<<endl;
     }
 }
+
 /*
  * Update a given Node
  */
@@ -242,3 +312,32 @@ void single_llist::update()
     }
     cout<<"Node Updated"<<endl;
 } 
+
+/*
+ * Sorting Link List
+ */
+void single_llist::sort()
+{
+    struct node *ptr, *s;
+    int value;
+    if (start == NULL)
+    {
+        cout<<"The List is empty"<<endl;
+        return;
+    }
+    ptr = start;
+    while (ptr != NULL)
+    {
+        for (s = ptr->next;s !=NULL;s = s->next)
+        {
+            if (ptr->info > s->info)
+            {
+                value = ptr->info;
+                ptr->info = s->info;
+                s->info = value;
+            }
+        }
+        ptr = ptr->next;
+    }
+}
+
