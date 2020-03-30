@@ -206,3 +206,39 @@ void single_llist::insert_pos()
         cout<<"Positon out of range"<<endl;
     }
 }
+/*
+ * Update a given Node
+ */
+void single_llist::update()
+{
+    int value, pos, i;
+    if (start == NULL)
+    {
+        cout<<"List is empty"<<endl;
+        return;
+    }
+    cout<<"Enter the node postion to be updated: ";
+    cin>>pos;
+    cout<<"Enter the new value: ";
+    cin>>value;
+    struct node *s, *ptr;
+    s = start;
+    if (pos == 1)
+    {
+        start->info = value; 
+    }
+    else
+    {
+        for (i = 0;i < pos - 1;i++)
+        {
+            if (s == NULL)
+            {
+                cout<<"There are less than "<<pos<<" elements";
+                return;
+            }
+            s = s->next;
+        }
+        s->info = value;  
+    }
+    cout<<"Node Updated"<<endl;
+} 
