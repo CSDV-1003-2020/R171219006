@@ -277,6 +277,43 @@ void single_llist::insert_pos()
 }
 
 /*
+ * Update a given Node
+ */
+void single_llist::update()
+{
+    int value, pos, i;
+    if (start == NULL)
+    {
+        cout<<"List is empty"<<endl;
+        return;
+    }
+    cout<<"Enter the node postion to be updated: ";
+    cin>>pos;
+    cout<<"Enter the new value: ";
+    cin>>value;
+    struct node *s, *ptr;
+    s = start;
+    if (pos == 1)
+    {
+        start->info = value; 
+    }
+    else
+    {
+        for (i = 0;i < pos - 1;i++)
+        {
+            if (s == NULL)
+            {
+                cout<<"There are less than "<<pos<<" elements";
+                return;
+            }
+            s = s->next;
+        }
+        s->info = value;  
+    }
+    cout<<"Node Updated"<<endl;
+} 
+
+/*
  * Sorting Link List
  */
 void single_llist::sort()
@@ -303,6 +340,26 @@ void single_llist::sort()
         ptr = ptr->next;
     }
 }
+/*
+ * Display Elements of a link list
+ */
+void single_llist::display()
+{
+    struct node *temp;
+    if (start == NULL)
+    {
+        cout<<"The List is Empty"<<endl;
+        return;
+    }
+    temp = start;
+    cout<<"Elements of list are: "<<endl;
+    while (temp != NULL)
+    {
+        cout<<temp->info<<"->";
+        temp = temp->next;
+    }
+    cout<<"NULL"<<endl;
+}
 
 /*
  * Reverse Link List
@@ -310,6 +367,8 @@ void single_llist::sort()
 void single_llist::reverse()
 {
     struct node *ptr1, *ptr2, *ptr3;
+    int value, pos = 0;
+    bool flag = false;
     if (start == NULL)
     {
         cout<<"List is empty"<<endl;
@@ -333,5 +392,26 @@ void single_llist::reverse()
     }
     start = ptr2;
 }
- 
 
+ /*
+ * Searching an element
+ */
+void single_llist::search()
+{
+    cout<<"Enter the value to be searched: ";
+    cin>>value;
+    struct node *s;
+    s = start;
+    while (s != NULL)
+    {
+        pos++;
+        if (s->info == value)
+        {
+            flag = true;
+            cout<<"Element "<<value<<" is found at position "<<pos<<endl;
+        }
+        s = s->next;
+    }
+    if (!flag)
+        cout<<"Element "<<value<<" not found in the list"<<endl;  
+}
