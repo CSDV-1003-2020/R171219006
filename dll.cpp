@@ -114,3 +114,88 @@ int main()
     }
     return 0;
 }
+
+/*
+ * Create Double Link List
+ */
+void double_llist::create_list(int value)
+{
+    struct node *s, *temp;
+    temp = new(struct node); 
+    temp->info = value;
+    temp->next = NULL;
+    if (start == NULL)
+    {
+        temp->prev = NULL;
+        start = temp;
+    }
+    else
+    {
+        s = start;
+        while (s->next != NULL)
+            s = s->next;
+        s->next = temp;
+        temp->prev = s;
+    }
+}
+ 
+/*
+ * Insertion at the beginning
+ */
+void double_llist::add_begin(int value)
+{
+    if (start == NULL)
+    {
+        cout<<"First Create the list."<<endl;
+        return;
+    }
+    struct node *temp;
+    temp = new(struct node);
+    temp->prev = NULL;
+    temp->info = value;
+    temp->next = start;
+    start->prev = temp;
+    start = temp;
+    cout<<"Element Inserted"<<endl;
+}
+ 
+/*
+ * Insertion of element at a particular position
+ */
+void double_llist::add_after(int value, int pos)
+{
+    if (start == NULL)
+    {
+        cout<<"First Create the list."<<endl;
+        return;
+    }
+    struct node *tmp, *q;
+    int i;
+    q = start;
+    for (i = 0;i < pos - 1;i++)
+    {
+        q = q->next;
+        if (q == NULL)
+        {
+            cout<<"There are less than ";
+            cout<<pos<<" elements."<<endl;
+            return;
+        }
+    }
+    tmp = new(struct node);
+    tmp->info = value;
+    if (q->next == NULL)
+    {
+        q->next = tmp;
+        tmp->next = NULL;
+        tmp->prev = q;      
+    }
+    else
+    {
+        tmp->next = q->next;
+        tmp->next->prev = tmp;
+        q->next = tmp;
+        tmp->prev = q;
+    }
+    cout<<"Element Inserted"<<endl;
+}
