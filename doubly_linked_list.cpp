@@ -114,3 +114,81 @@ int main()
     }
     return 0;
 }
+/*
+ * Deletion of element from the list
+ */
+void double_llist::delete_element(int value)
+{
+    struct node *tmp, *q;
+     /*first element deletion*/
+    if (start->info == value)
+    {
+        tmp = start;
+        start = start->next;  
+        start->prev = NULL;
+        cout<<"Element Deleted"<<endl;
+        free(tmp);
+        return;
+    }
+    q = start;
+    while (q->next->next != NULL)
+    {   
+        /*Element deleted in between*/
+        if (q->next->info == value)  
+        {
+            tmp = q->next;
+            q->next = tmp->next;
+            tmp->next->prev = q;
+            cout<<"Element Deleted"<<endl;
+            free(tmp);
+            return;
+        }
+        q = q->next;
+    }
+     /*last element deleted*/
+    if (q->next->info == value)    
+    { 	
+        tmp = q->next;
+        free(tmp);
+        q->next = NULL;
+        cout<<"Element Deleted"<<endl;
+        return;
+    }
+    cout<<"Element "<<value<<" not found"<<endl;
+}
+ 
+/*
+ * Display elements of Doubly Link List
+ */
+void double_llist::display_dlist()
+{
+    struct node *q;
+    if (start == NULL)
+    {
+        cout<<"List empty,nothing to display"<<endl;
+        return;
+    }
+    q = start;
+    cout<<"The Doubly Link List is :"<<endl;
+    while (q != NULL)
+    {
+        cout<<q->info<<" <-> ";
+        q = q->next;
+    }
+    cout<<"NULL"<<endl;
+}
+ 
+/*
+ * Number of elements in Doubly Link List
+ */
+void double_llist::count()
+{ 	
+    struct node *q = start;
+    int cnt = 0;
+    while (q != NULL)
+    {
+        q = q->next;
+        cnt++;
+    }
+    cout<<"Number of elements are: "<<cnt<<endl;
+}
